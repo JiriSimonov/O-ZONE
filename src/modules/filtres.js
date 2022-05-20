@@ -10,17 +10,26 @@ export const categotyFilter = (goods, value) => {
     });
 }
 
-export const priceFilterMin = (goods, minValue) => {
-    return goods.filter((goodsItem) => {
-        return goodsItem.price >= minValue
-    });
-}
-
 export const priceFilter = (goods, minValue, maxValue) => {
     return goods.filter((goodsItem) => {
-        if (goodsItem.price >= minValue && goodsItem.price <= maxValue) {
+        if (minValue === '' && maxValue === '') {
             return goodsItem;
+        } else if (minValue !== '' && maxValue !== '') {
+            return goodsItem.price >= +minValue && goodsItem.price <= +maxValue;
+        } else if (minValue !== '' && maxValue === '') {
+            return goodsItem.price >= +minValue;
+        } else if (minValue === '' && maxValue !== '') {
+            return goodsItem.price <= +maxValue;
         }
     });
 }
 
+export const hotSaleFilter = (goods, value) => {
+    return goods.filter((goodsItem) => {
+        if (value) {
+            return goodsItem.sale === true;
+        } else {
+            return goodsItem;
+        }
+    });
+}
