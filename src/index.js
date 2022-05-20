@@ -9,4 +9,3 @@ cart()
 search()
 catalog()
 price()
-
